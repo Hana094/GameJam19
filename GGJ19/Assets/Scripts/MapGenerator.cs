@@ -30,7 +30,7 @@ public class MapGenerator : MonoBehaviour
     // Update is called once per frame
     void Start()
     {
-        BuildMap();
+        //BuildMap();
     }
 
     public void BuildMap()

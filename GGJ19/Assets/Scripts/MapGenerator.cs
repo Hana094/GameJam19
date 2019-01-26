@@ -98,6 +98,7 @@ public class MapGenerator : MonoBehaviour
         float y = _father.position.z;
 
         Obstacle aux = obstaclePrefabList[Random.Range(0, obstaclePrefabList.Count)];
+        
 
         //getting the coordinates of the new obstacle
         switch (direction)
@@ -142,6 +143,7 @@ public class MapGenerator : MonoBehaviour
 
         if (canBuild && overlaps)
         {
+            
             CreateNode(direction,aux,_father,new Vector3(x,0,y));
         }
 
@@ -173,6 +175,7 @@ public class MapGenerator : MonoBehaviour
         if (_father!= null)
         {
             obstacleList[obstacleList.IndexOf(_father)].children.Add(aux);
+            obstacleList[obstacleList.IndexOf(_father)].read = true;
         }
         
 

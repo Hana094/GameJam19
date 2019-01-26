@@ -13,6 +13,5 @@ MonoBehaviour:
   m_Name: Other3x3
   m_EditorClassIdentifier: 
   size: 0300000003000000
-  name: 
+  name: 1x2
   body: {fileID: 7879168831257296081, guid: 64dfd12d0b3ed8f45b47a8b36f1326a3, type: 3}
-  isBuilding: 1

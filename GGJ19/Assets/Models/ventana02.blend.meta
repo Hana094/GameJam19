@@ -13,7 +13,12 @@ ModelImporter:
     4300002: Cube_006
     7400000: Default Take
     9500000: //RootNode
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: None__textureAtlas_Buildings_psd_001
+    second: {fileID: 2100000, guid: 5a4eb7d7287a0cb41b3545e031c60aff, type: 2}
   materials:
     importMaterials: 1
     materialName: 0

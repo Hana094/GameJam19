@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 689894ea0684fc64894994c07e3f3ae3, type: 3}
   m_Name: edificioRojo
   m_EditorClassIdentifier: 
-  size: 030000000300000002000000
+  size:
+  - 4
+  - 4
+  - 2.5
   name: edificioRojo
   body: {fileID: 1738101122921094904, guid: 7072adac31f7fd949b54e1656b1884b3, type: 3}

@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 689894ea0684fc64894994c07e3f3ae3, type: 3}
   m_Name: edificioVerde
   m_EditorClassIdentifier: 
-  size: 030000000300000002000000
+  size:
+  - 4
+  - 4
+  - 2.5
   name: edificioVerde
   body: {fileID: 5117785167819060527, guid: 4d3b9555b7fde844d91219d44daeeac5, type: 3}

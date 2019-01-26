@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   size: 030000000300000002000000
   name: edificioVerde
-  body: {fileID: 8220115292181653464, guid: ef34579a47a24544f8a506fccc98d282, type: 3}
+  body: {fileID: 5117785167819060527, guid: 4d3b9555b7fde844d91219d44daeeac5, type: 3}

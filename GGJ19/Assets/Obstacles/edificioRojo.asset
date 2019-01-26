@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   size: 030000000300000002000000
   name: edificioRojo
-  body: {fileID: 3129245709831625589, guid: e6b0ba9de52bfd24796a4dc3dfc2322a, type: 3}
+  body: {fileID: 1738101122921094904, guid: 7072adac31f7fd949b54e1656b1884b3, type: 3}

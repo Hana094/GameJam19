@@ -15,3 +15,4 @@ MonoBehaviour:
   size: 0200000002000000
   name: Shelter
   body: {fileID: 1312372382863007335, guid: 2d7645741e899a6478e93fad041f5d26, type: 3}
+  isBuilding: 1

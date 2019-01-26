@@ -11,4 +11,6 @@ public class Obstacle : ScriptableObject
     public new string name;
 
     public GameObject body;
+
+    public bool isBuilding;
 }

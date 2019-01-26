@@ -210,12 +210,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 311fed795df326e45b04e4a7910fe030, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnLength: 0
-  maxObstacles: 10
+  spawnLength: 3
+  maxObstacles: 50
   untilCantspawnMore: 0
   GridLength: 20
   shelterObstacle: {fileID: 11400000, guid: 2d797c9f9c05a684b8a651e94a4c4501, type: 2}
-  obstaclePrefabList: []
+  obstaclePrefabList:
+  - {fileID: 11400000, guid: 2d797c9f9c05a684b8a651e94a4c4501, type: 2}
+  - {fileID: 11400000, guid: 6adf9da44e727b2469d36ae4a63a2ac1, type: 2}
+  childDevAux: 0.4
 --- !u!4 &533827282
 Transform:
   m_ObjectHideFlags: 0

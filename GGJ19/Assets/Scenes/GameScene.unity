@@ -275,9 +275,9 @@ MonoBehaviour:
   GridLength: 20
   shelterObstacle: {fileID: 11400000, guid: 2d797c9f9c05a684b8a651e94a4c4501, type: 2}
   obstaclePrefabList:
-  - {fileID: 11400000, guid: 9880d6fa2ff78ef439c7198c7c9cb5ae, type: 2}
-  - {fileID: 11400000, guid: 6adf9da44e727b2469d36ae4a63a2ac1, type: 2}
-  - {fileID: 11400000, guid: 9880d6fa2ff78ef439c7198c7c9cb5ae, type: 2}
+  - {fileID: 11400000, guid: 3cf899d43a1cc094c98876d4235ea6e3, type: 2}
+  - {fileID: 11400000, guid: 995dd77798667c8469747bfe7bd47afe, type: 2}
+  - {fileID: 11400000, guid: a676e2d0e62fa5a45939418ffc01ef2e, type: 2}
   childDevAux: 1
 --- !u!4 &533827282
 Transform:

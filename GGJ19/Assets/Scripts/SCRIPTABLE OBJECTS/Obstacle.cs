@@ -6,7 +6,7 @@ using UnityEngine;
 public class Obstacle : ScriptableObject
 {
 
-    public int[] size;// 0 is the x, 1 is the y, 3 is the high
+    public float[] size;// 0 is the x, 1 is the y, 3 is the high
 
     public new string name;
 

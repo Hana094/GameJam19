@@ -94,7 +94,7 @@ public class MovementController : MonoBehaviour
 
     void Update()
     {
-        m_animator.SetBool("Grounded", m_isGrounded);
+        //m_animator.SetBool("Grounded", m_isGrounded);
 
         switch (m_controlMode)
         {
@@ -139,7 +139,7 @@ public class MovementController : MonoBehaviour
 
         m_animator.SetFloat("MoveSpeed", m_currentV);
 
-        JumpingAndLanding();
+        //JumpingAndLanding();
     }
 
     private void DirectUpdate()
@@ -174,27 +174,8 @@ public class MovementController : MonoBehaviour
             m_animator.SetFloat("MoveSpeed", direction.magnitude);
         }
 
-        JumpingAndLanding();
+        //JumpingAndLanding();
     }
 
-    private void JumpingAndLanding()
-    {
-        bool jumpCooldownOver = (Time.time - m_jumpTimeStamp) >= m_minJumpInterval;
-
-        if (jumpCooldownOver && m_isGrounded && Input.GetKey(KeyCode.Space))
-        {
-            m_jumpTimeStamp = Time.time;
-            m_rigidBody.AddForce(Vector3.up * m_jumpForce, ForceMode.Impulse);
-        }
-
-        if (!m_wasGrounded && m_isGrounded)
-        {
-            m_animator.SetTrigger("Land");
-        }
-
-        if (!m_isGrounded && m_wasGrounded)
-        {
-            m_animator.SetTrigger("Jump");
-        }
-    }
+    
 }

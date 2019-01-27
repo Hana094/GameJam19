@@ -7,6 +7,7 @@ public enum ResourceCode{
 }
 public class Resource : MonoBehaviour
 {
+    public AudioSource audio;
     public ParticleSystem particles;
     public GameObject body;
     bool canInteract = true;
@@ -20,6 +21,7 @@ public class Resource : MonoBehaviour
             //gameObject.SetActive(false);
             body.SetActive(false);
             canInteract = false;
+            audio.Play();
             Invoke("Deactivate", 2);
         }
     }

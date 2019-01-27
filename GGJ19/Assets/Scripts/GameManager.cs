@@ -6,6 +6,10 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
+public enum SceneName
+{
+    splashScreen,MenuScene,GameScene
+}
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance = null;
@@ -21,9 +25,14 @@ public class GameManager : MonoBehaviour
 
     public int[] baseResources = { 3, 3, 3 };
 
-    List<RefugeeRef> refAtShelter = new List<RefugeeRef>();
+    public List<RefugeeRef> refAtShelter = new List<RefugeeRef>();
 
-    int refugeeLimit=5;
+    int refugeeLimit=2;
+
+    public int RefLimit
+    {
+        get { return refugeeLimit; }
+    }
 
     public List<Player> players = new List<Player>();
 
@@ -34,6 +43,12 @@ public class GameManager : MonoBehaviour
     public Text timer;
 
     Coroutine gameTimer;
+
+    bool gameWon=false;
+
+    public AudioClip[] clips;
+
+    public AudioSource audio;
 
     void Awake()
     {
@@ -65,9 +80,12 @@ public class GameManager : MonoBehaviour
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        audio.Stop();
         Debug.Log("OnSceneLoaded: " + scene.name + scene.buildIndex);
         if (scene.name.Equals("GameScene"))
         {
+            audio.clip = clips[1];
+            Resources.gameObject.SetActive(true);
             players.Clear();
             foreach (Player p in FindObjectsOfType<Player>())
             {
@@ -77,11 +95,22 @@ public class GameManager : MonoBehaviour
             StartGame();
         }
         
-        else if (scene.name.Equals("menu"))
+        else if (scene.name.Equals("splashScreen"))
         {
-           
+            LoadMapLevel(SceneName.MenuScene,true);
         }
-        
+
+        else if (scene.name.Equals("MenuScene"))
+        {
+            //cambiar
+            audio.clip = clips[1];
+            if (gameTimer != null)
+            {
+                StopCoroutine(gameTimer);
+            }
+            gameTimer = StartCoroutine(ResultRoutine());
+        }
+
         //
         //print("Lol");
 
@@ -91,6 +120,9 @@ public class GameManager : MonoBehaviour
     {
         Fader.CrossFadeAlpha(0, 0.1f, true);
 
+        SetNeeds();
+
+        audio.Play();
         GameDone = false;
 
         foreach (Player p in players)
@@ -117,49 +149,143 @@ public class GameManager : MonoBehaviour
 
     }
 
+    IEnumerator ResultRoutine()
+    {
+        Fader.CrossFadeAlpha(0, 0.1f, true);
+
+        AdvanceManager aux = FindObjectOfType<AdvanceManager>();
+
+        aux.evaluate(gameWon);
+
+        //audio.Play();
+
+        yield return null;
+
+    }
+
     void EndGame()
     {
 
-
+        Resources.gameObject.SetActive(false);
         if (gameTimer != null)
         {
             StopCoroutine(gameTimer);
         }
         //audioSrc.Stop();
 
+        gameWon = true;
+        for (int i = 0; i < 3; i++)
+        {
+            if (gameWon && minimum[i]>scores[i])
+            {
+                gameWon = false;
+            }
+        }
+        Fader.CrossFadeAlpha(1, 0, true);
 
-        
+        map.DeleteMap();
 
-        //LoadMapLevel(SceneName.scoreScreen, false);
+        LoadMapLevel(SceneName.MenuScene, false);
 
 
     }
 
-    public bool RefugeeAtShelter( int[] refugeeNeeds)
+    public void UpdateLimit()
+    {
+        refugeeLimit = Mathf.Clamp(refugeeLimit+2,2,6);
+    }
+
+    public void LoadMapLevel(SceneName nextScene, bool delayLoad = true)
+    {
+        Resources.gameObject.SetActive(false);
+        if (gameTimer!=null)
+        {
+            StopCoroutine(gameTimer);
+        }
+        gameTimer = StartCoroutine(AsyncLoadMap(nextScene, delayLoad));
+
+    }
+
+    public void EndApp()
+    {
+        Application.Quit();
+    }
+    IEnumerator AsyncLoadMap(SceneName sceneIndex, bool time2Load)
+    {
+        
+
+        yield return new WaitForSeconds(0.75f);
+
+        float time2Wait = (time2Load) ? 1.5f : 0;
+
+        Fader.CrossFadeAlpha(1, time2Wait, true);
+        while (time2Wait > 0)
+        {
+            time2Wait -= Time.deltaTime;
+            yield return null;
+        }
+
+        
+
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync((int)(sceneIndex), LoadSceneMode.Single);
+
+        while (!asyncLoad.isDone)
+        {
+            yield return null;
+        }
+    }
+
+        //pr
+
+        public bool RefugeeAtShelter( int[] refugeeNeeds)
     {
         bool res = false;
 
         if (refAtShelter.Count<refugeeLimit && !GameDone)
         {
-            print("lol");
+            
             res = true;
             refAtShelter.Add(new RefugeeRef(refugeeNeeds));
+            SetNeeds();
         }
 
         return res;
     }
 
+
     public void StartGame()
     {
-        for (int i = 0; i < scores.Length; i++)
-        {
-            scores[i] = 0;
-        }
+        scores = new int[4];
         // needs
         map.BuildMap();
         map.SetPlayersPos();
 
         gameTimer = StartCoroutine(MatchTimer());
+    }
+
+    public void SetNeeds()
+    {
+        
+
+        for (int i = 0; i < 3; i++)
+        {
+            minimum[i] = baseResources[i];
+        }
+
+        foreach (RefugeeRef r in refAtShelter )
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                minimum[i] += r.needs[i];
+            }
+        }
+        for (int i = 0; i < 3; i++)
+        {
+            textScores[i].text = scores[i] + "/" + minimum[i];
+        }
+        scores[3] = refAtShelter.Count;
+        textScores[3].text = scores[3] + "/" + refugeeLimit;
+
     }
 
     public void UpdateScores(int resourceId)

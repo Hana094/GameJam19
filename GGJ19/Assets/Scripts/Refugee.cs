@@ -12,6 +12,8 @@ public class Refugee : MonoBehaviour
 
     public ParticleSystem particles;
 
+    public AudioSource audio;
+
     public int[] needs;// 0 food, 1 logs, 3 buildMaterial
     bool canInteract = true;
 
@@ -28,6 +30,7 @@ public class Refugee : MonoBehaviour
             body.SetActive(false);
             sprite.gameObject.SetActive(false);
             canInteract = false;
+            audio.Play();
             Invoke("Deactivate",5);
         }
     }

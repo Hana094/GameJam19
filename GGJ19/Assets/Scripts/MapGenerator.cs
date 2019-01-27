@@ -28,11 +28,13 @@ public class MapGenerator : MonoBehaviour
     public List<GameObject> ResourcesPrefabList;
     public List<GameObject> RefugeesPrefabList;
 
-    public int refuggesTries = 5;
+    public int refuggesTries = 2;
 
-    public int resourcesTries = 25;
+    public int resourcesTries = 75;
 
     public float childDevAux;
+
+    GameObject map;
 
     // Update is called once per frame
     void Start()
@@ -42,6 +44,8 @@ public class MapGenerator : MonoBehaviour
 
     public void BuildMap()
     {
+        map = new GameObject();
+        map.transform.parent = transform;
         int childDirection = 0;
         //clear the list of nodes
         obstacleList.Clear();
@@ -198,7 +202,7 @@ public class MapGenerator : MonoBehaviour
         foreach (ObstacleNode obs in obstacleList)
         {
             //Instantiate(obs.res.body, obs.position, Quaternion.identity, transform);
-            Instantiate(obs.res.body,obs.position,((obs.IsSimetrical() && Random.Range(0f, 1f) < 0.5f) ? Quaternion.Euler(0,90,0) : Quaternion.identity),transform);
+            Instantiate(obs.res.body,obs.position,((obs.IsSimetrical() && Random.Range(0f, 1f) < 0.5f) ? Quaternion.Euler(0,90,0) : Quaternion.identity),map.transform);
         }
         int refGen = 0;
         int resGen = 0;
@@ -210,7 +214,7 @@ public class MapGenerator : MonoBehaviour
             y = Random.Range(0, GridLength);
             if (mapGrid[x][y]==0)
             {
-                Instantiate( RefugeesPrefabList[Random.Range(0, RefugeesPrefabList.Count)] , new Vector3(x,0,y), Quaternion.Euler(0, 90* Random.Range(0, 4), 0) , transform);
+                Instantiate( RefugeesPrefabList[Random.Range(0, RefugeesPrefabList.Count)] , new Vector3(x,0,y), Quaternion.Euler(0, 90* Random.Range(0, 4), 0) , null);
                 mapGrid[x][y] = 1;
 
                 refGen++;
@@ -218,15 +222,15 @@ public class MapGenerator : MonoBehaviour
         }
         int iterations = 0;
 
-        while (refGen < resourcesTries && iterations < 100)
+        while (resGen < resourcesTries && iterations < 2000)
         {
             x = Random.Range(0, GridLength);
             y = Random.Range(0, GridLength);
             if (mapGrid[x][y] == 0)
             {
-                Instantiate( ResourcesPrefabList[Random.Range(0, ResourcesPrefabList.Count)], new Vector3(x, 0, y), Quaternion.Euler(0, 90 * Random.Range(0, 4), 0), transform);
+                Instantiate( ResourcesPrefabList[Random.Range(0, ResourcesPrefabList.Count)], new Vector3(x, 0, y), Quaternion.Euler(0, 90 * Random.Range(0, 4), 0), null);
                 mapGrid[x][y] = 1;
-                refGen++;
+                resGen++;
             }
             iterations++;
         }
@@ -243,6 +247,11 @@ public class MapGenerator : MonoBehaviour
             p.gameObject.transform.position = new Vector3(obstacleList[0].position.x - s, 1, obstacleList[0].position.z - s);
             s++;
         }
+    }
+
+    public void DeleteMap()
+    {
+        GameObject.Destroy(map);
     }
 
 }

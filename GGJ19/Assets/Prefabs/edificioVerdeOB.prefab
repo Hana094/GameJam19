@@ -2401,7 +2401,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b20486047c32758409215153cc2534a6, type: 3}
+  - {fileID: 2100000, guid: 21395b010cf564b40b0bbc4115f6acee, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3430,7 +3430,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b20486047c32758409215153cc2534a6, type: 3}
+  - {fileID: 2100000, guid: 21395b010cf564b40b0bbc4115f6acee, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4384,7 +4384,6 @@ GameObject:
   - component: {fileID: 7367701194852554091}
   - component: {fileID: 7367701194853652395}
   - component: {fileID: 7367701194859018927}
-  - component: {fileID: 6251294076584749340}
   m_Layer: 0
   m_Name: arbusto
   m_TagString: Untagged
@@ -4470,19 +4469,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!65 &6251294076584749340
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7367701194851715439}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.2576636, y: 1.6341563, z: 0.8058752}
-  m_Center: {x: 0.049482476, y: 0.011706955, z: 0.4257636}
 --- !u!1 &7392222261882587489
 GameObject:
   m_ObjectHideFlags: 0
@@ -5465,7 +5451,6 @@ GameObject:
   - component: {fileID: 8504220651330110592}
   - component: {fileID: 8504220651329144384}
   - component: {fileID: 8504220651340442436}
-  - component: {fileID: 5626587437953141961}
   m_Layer: 0
   m_Name: arbusto (1)
   m_TagString: Untagged
@@ -5551,19 +5536,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!65 &5626587437953141961
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8504220651331082372}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.2576636, y: 1.6341565, z: 0.8058752}
-  m_Center: {x: 0.04948129, y: 0.011705525, z: 0.4257636}
 --- !u!1 &8626542785419855765
 GameObject:
   m_ObjectHideFlags: 0

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class MovementController : MonoBehaviour
 {
+
     private enum ControlMode
     {
         Tank,
@@ -13,8 +14,8 @@ public class MovementController : MonoBehaviour
     [SerializeField] private float m_moveSpeed = 2;
     [SerializeField] private float m_turnSpeed = 200;
     [SerializeField] private float m_jumpForce = 4;
-    [SerializeField] private Animator m_animator;
     [SerializeField] private Rigidbody m_rigidBody;
+    public int playerId;
 
     [SerializeField] private ControlMode m_controlMode = ControlMode.Direct;
 
@@ -34,8 +35,6 @@ public class MovementController : MonoBehaviour
 
     private bool m_isGrounded;
     private List<Collider> m_collisions = new List<Collider>();
-
-    public int playerId;
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -116,11 +115,11 @@ public class MovementController : MonoBehaviour
 
     private void TankUpdate()
     {
-        float v = Input.GetAxis("Vertical"+playerId);
-        float h = Input.GetAxis("Horizontal"+playerId);
+        float v = Input.GetAxis("Vertical" + playerId);
+        float h = Input.GetAxis("Horizontal" + playerId);
 
-        //bool walk = Input.GetKey(KeyCode.LeftShift);
-        /*
+        bool walk = Input.GetKey(KeyCode.LeftShift);
+
         if (v < 0)
         {
             if (walk) { v *= m_backwardsWalkScale; }
@@ -129,7 +128,7 @@ public class MovementController : MonoBehaviour
         else if (walk)
         {
             v *= m_walkScale;
-        }*/
+        }
 
         m_currentV = Mathf.Lerp(m_currentV, v, Time.deltaTime * m_interpolation);
         m_currentH = Mathf.Lerp(m_currentH, h, Time.deltaTime * m_interpolation);
@@ -137,9 +136,9 @@ public class MovementController : MonoBehaviour
         transform.position += transform.forward * m_currentV * m_moveSpeed * Time.deltaTime;
         transform.Rotate(0, m_currentH * m_turnSpeed * Time.deltaTime, 0);
 
-        m_animator.SetFloat("MoveSpeed", m_currentV);
+        //m_animator.SetFloat("MoveSpeed", m_currentV);
 
-        //JumpingAndLanding();
+        JumpingAndLanding();
     }
 
     private void DirectUpdate()
@@ -171,11 +170,32 @@ public class MovementController : MonoBehaviour
             transform.rotation = Quaternion.LookRotation(m_currentDirection);
             transform.position += m_currentDirection * m_moveSpeed * Time.deltaTime;
 
-            m_animator.SetFloat("MoveSpeed", direction.magnitude);
+            //m_animator.SetFloat("MoveSpeed", direction.magnitude);
         }
 
-        //JumpingAndLanding();
+        JumpingAndLanding();
     }
 
-    
+    private void JumpingAndLanding()
+    {
+        bool jumpCooldownOver = (Time.time - m_jumpTimeStamp) >= m_minJumpInterval;
+
+        if (jumpCooldownOver && m_isGrounded && Input.GetKey(KeyCode.Space))
+        {
+            m_jumpTimeStamp = Time.time;
+            m_rigidBody.AddForce(Vector3.up * m_jumpForce, ForceMode.Impulse);
+        }
+
+        if (!m_wasGrounded && m_isGrounded)
+        {
+            //m_animator.SetTrigger("Land");
+        }
+
+        if (!m_isGrounded && m_wasGrounded)
+        {
+           // m_animator.SetTrigger("Jump");
+        }
+    }
+
+
 }

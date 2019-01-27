@@ -103,7 +103,7 @@ public class GameManager : MonoBehaviour
         else if (scene.name.Equals("MenuScene"))
         {
             //cambiar
-            audio.clip = clips[1];
+            audio.clip = clips[0];
             if (gameTimer != null)
             {
                 StopCoroutine(gameTimer);

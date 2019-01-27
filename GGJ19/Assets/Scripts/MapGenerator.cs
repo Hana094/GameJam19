@@ -208,7 +208,7 @@ public class MapGenerator : MonoBehaviour
         int resGen = 0;
         int x = 0;
         int y = 0;
-        while (refGen<refuggesTries)
+        while (refGen<3)
         {
             x = Random.Range(0,GridLength);
             y = Random.Range(0, GridLength);
@@ -222,7 +222,19 @@ public class MapGenerator : MonoBehaviour
         }
         int iterations = 0;
 
-        while (resGen < resourcesTries && iterations < 2000)
+        int stuff2Spawn = 81;
+        switch (GameManager.instance.RefLimit / 2)
+        {
+            case 1:
+                stuff2Spawn = 81 / 3;
+                break;
+            case 2:
+                stuff2Spawn = 81 / 2;
+                break;
+         
+        }
+
+        while (resGen < stuff2Spawn && iterations < 500)
         {
             x = Random.Range(0, GridLength);
             y = Random.Range(0, GridLength);

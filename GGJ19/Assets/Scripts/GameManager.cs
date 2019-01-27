@@ -27,6 +27,14 @@ public class GameManager : MonoBehaviour
 
     public List<Player> players = new List<Player>();
 
+    //Timer Stuff
+
+    public float timeLeft;
+
+    public Text timer;
+
+    Coroutine gameTimer;
+
     void Awake()
     {
         map = GetComponent<MapGenerator>();
@@ -63,7 +71,7 @@ public class GameManager : MonoBehaviour
             players.Clear();
             foreach (Player p in FindObjectsOfType<Player>())
             {
-                print(p.name);
+                p.canMove = false;
                 players.Add(p);
             }
             StartGame();
@@ -79,10 +87,52 @@ public class GameManager : MonoBehaviour
 
     }
 
-    // Update is called once per frame
-    void Update()
+    IEnumerator MatchTimer()
     {
+        Fader.CrossFadeAlpha(0, 0.1f, true);
+
+        GameDone = false;
+
+        foreach (Player p in players)
+        {
+            p.canMove = true;
+        }
+
+        float timeRemaining = timeLeft;
+        while (timeRemaining > 0)
+        {
+
+            timeRemaining -= Time.deltaTime;
+            string minSec = (int)timeRemaining + "";
+            timer.text = minSec;
+            
+            yield return null;
+
+        }
+        GameDone = true;
+
+        yield return new WaitForSeconds(0.75f);
+
+        EndGame();
+
+    }
+
+    void EndGame()
+    {
+
+
+        if (gameTimer != null)
+        {
+            StopCoroutine(gameTimer);
+        }
+        //audioSrc.Stop();
+
+
         
+
+        //LoadMapLevel(SceneName.scoreScreen, false);
+
+
     }
 
     public bool RefugeeAtShelter( int[] refugeeNeeds)
@@ -108,6 +158,8 @@ public class GameManager : MonoBehaviour
         // needs
         map.BuildMap();
         map.SetPlayersPos();
+
+        gameTimer = StartCoroutine(MatchTimer());
     }
 
     public void UpdateScores(int resourceId)

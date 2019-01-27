@@ -53,6 +53,12 @@ public class Player : MonoBehaviour
         interact = StartCoroutine(InteractRoutine());
     }
 
+    public void SetMove(bool c)
+    {
+        canMove = c;
+        mController.SetCanMove = c;
+    }
+
     IEnumerator InteractRoutine()
     {
         anim.SetInteger("State",2);

@@ -10,7 +10,7 @@ public class MovementController : MonoBehaviour
         Tank,
         Direct
     }
-
+    private bool canMove=true;
     [SerializeField] private float m_moveSpeed = 2;
     [SerializeField] private float m_turnSpeed = 200;
     [SerializeField] private float m_jumpForce = 4;
@@ -117,28 +117,31 @@ public class MovementController : MonoBehaviour
 
     private void TankUpdate()
     {
-        float v = Input.GetAxis("Vertical" + playerId);
-        float h = Input.GetAxis("Horizontal" + playerId);
-
-        bool walk = Input.GetKey(KeyCode.LeftShift);
-
-        if (v < 0)
+        if (canMove)
         {
-            if (walk) { v *= m_backwardsWalkScale; }
-            else { v *= m_backwardRunScale; }
+            float v = Input.GetAxis("Vertical" + playerId);
+            float h = Input.GetAxis("Horizontal" + playerId);
+
+            bool walk = Input.GetKey(KeyCode.LeftShift);
+
+            if (v < 0)
+            {
+                if (walk) { v *= m_backwardsWalkScale; }
+                else { v *= m_backwardRunScale; }
+            }
+            else if (walk)
+            {
+                v *= m_walkScale;
+            }
+
+            m_currentV = Mathf.Lerp(m_currentV, v, Time.deltaTime * m_interpolation);
+            m_currentH = Mathf.Lerp(m_currentH, h, Time.deltaTime * m_interpolation);
+
+            transform.position += transform.forward * m_currentV * m_moveSpeed * Time.deltaTime;
+            transform.Rotate(0, m_currentH * m_turnSpeed * Time.deltaTime, 0);
+
+            m_animator.SetFloat("Speed", m_currentV);
         }
-        else if (walk)
-        {
-            v *= m_walkScale;
-        }
-
-        m_currentV = Mathf.Lerp(m_currentV, v, Time.deltaTime * m_interpolation);
-        m_currentH = Mathf.Lerp(m_currentH, h, Time.deltaTime * m_interpolation);
-
-        transform.position += transform.forward * m_currentV * m_moveSpeed * Time.deltaTime;
-        transform.Rotate(0, m_currentH * m_turnSpeed * Time.deltaTime, 0);
-
-        m_animator.SetFloat("Speed", m_currentV);
 
         JumpingAndLanding();
     }
@@ -193,6 +196,11 @@ public class MovementController : MonoBehaviour
         {
            // m_animator.SetTrigger("Jump");
         }
+    }
+
+    public bool SetCanMove
+    {
+        set{ canMove = value; }
     }
 
 

@@ -8,7 +8,12 @@ public class Player : MonoBehaviour
     public bool canMove;
     Rigidbody rb;
     Refugee refugee;
+    public Refugee RefugeeRef{
+        get { return refugee; }
+        set { refugee = value; }
+    }
     Coroutine interact;
+    MovementController mController;
     float timeInteracting;
 
     Animator anim;
@@ -18,6 +23,7 @@ public class Player : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
+        mController = GetComponent<MovementController>();
     }
 
     void Update()
@@ -49,7 +55,9 @@ public class Player : MonoBehaviour
 
     IEnumerator InteractRoutine()
     {
-
+        anim.SetInteger("State",2);
+        mController.SetCanMove = false;
         yield return new WaitForSeconds(timeInteracting);
+        anim.SetInteger("State", 0);
     }
 }

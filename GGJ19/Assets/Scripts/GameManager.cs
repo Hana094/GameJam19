@@ -11,9 +11,13 @@ public class GameManager : MonoBehaviour
     public static GameManager instance = null;
     public MapGenerator map;
     public Canvas Resources;
+    int[] scores = new int[4];
+    int[] minimum = new int[4];
     public Image Fader;
 
-    public Text[] Scores; //0 comida,1 logs,3buildmat, 4refugees
+    public Text[] textScores; //0 comida,1 logs,3buildmat, 4refugees
+
+    bool GameDone = true;
 
     void Awake()
     {
@@ -69,6 +73,19 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
+        for (int i = 0; i < scores.Length; i++)
+        {
+            scores[i] = 0;
+        }
         map.BuildMap();
+    }
+
+    public void UpdateScores(int resourceId)
+    {
+        if (!GameDone)
+        {
+            scores[resourceId]++;
+            textScores[resourceId].text= scores[resourceId]+"/"+minimum[resourceId];
+        }
     }
 }

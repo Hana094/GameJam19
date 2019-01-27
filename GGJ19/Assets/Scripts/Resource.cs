@@ -7,13 +7,26 @@ public enum ResourceCode{
 }
 public class Resource : MonoBehaviour
 {
+    public ParticleSystem particles;
+    public GameObject body;
+    bool canInteract = true;
     public ResourceCode resource;
     private void OnTriggerEnter(Collider other)
     {
-        if (other.transform.CompareTag("Player"))
+        if (other.transform.CompareTag("Player") && canInteract)
         {
+            particles.Play();
             GameManager.instance.UpdateScores((int)resource);
-            gameObject.SetActive(false);
+            //gameObject.SetActive(false);
+            body.SetActive(false);
+            canInteract = false;
+            Invoke("Deactivate", 2);
         }
     }
+
+    void Deactivate()
+    {
+        gameObject.SetActive(false);
+    }
+
 }

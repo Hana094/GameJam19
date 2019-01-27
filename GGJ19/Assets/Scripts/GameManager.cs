@@ -19,6 +19,14 @@ public class GameManager : MonoBehaviour
 
     public bool GameDone = true;
 
+    public int[] baseResources = { 3, 3, 3 };
+
+    List<RefugeeRef> refAtShelter = new List<RefugeeRef>();
+
+    int refugeeLimit=5;
+
+    public List<Player> players = new List<Player>();
+
     void Awake()
     {
         map = GetComponent<MapGenerator>();
@@ -52,6 +60,12 @@ public class GameManager : MonoBehaviour
         Debug.Log("OnSceneLoaded: " + scene.name + scene.buildIndex);
         if (scene.name.Equals("GameScene"))
         {
+            players.Clear();
+            foreach (Player p in FindObjectsOfType<Player>())
+            {
+                print(p.name);
+                players.Add(p);
+            }
             StartGame();
         }
         
@@ -71,13 +85,29 @@ public class GameManager : MonoBehaviour
         
     }
 
+    public bool RefugeeAtShelter( int[] refugeeNeeds)
+    {
+        bool res = false;
+
+        if (refAtShelter.Count<refugeeLimit && !GameDone)
+        {
+            print("lol");
+            res = true;
+            refAtShelter.Add(new RefugeeRef(refugeeNeeds));
+        }
+
+        return res;
+    }
+
     public void StartGame()
     {
         for (int i = 0; i < scores.Length; i++)
         {
             scores[i] = 0;
         }
+        // needs
         map.BuildMap();
+        map.SetPlayersPos();
     }
 
     public void UpdateScores(int resourceId)
@@ -90,6 +120,7 @@ public class GameManager : MonoBehaviour
     }
 }
 
+[System.Serializable]
 public struct RefugeeRef
 {
     public int[] needs;

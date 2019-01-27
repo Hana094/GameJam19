@@ -14,15 +14,15 @@ public class Player : MonoBehaviour
     }
     Coroutine interact;
     MovementController mController;
-    float timeInteracting;
+    public float timeInteracting;
 
-    Animator anim;
+    public Animator anim;
 
     // Start is called before the first frame update
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        anim = GetComponent<Animator>();
+        
         mController = GetComponent<MovementController>();
     }
 
@@ -58,6 +58,8 @@ public class Player : MonoBehaviour
         anim.SetInteger("State",2);
         mController.SetCanMove = false;
         yield return new WaitForSeconds(timeInteracting);
+        refugee.Go2Shelter();
         anim.SetInteger("State", 0);
+        mController.SetCanMove = true;
     }
 }

@@ -25,6 +25,13 @@ public class MapGenerator : MonoBehaviour
 
     public List<Obstacle> obstaclePrefabList;
 
+    public List<GameObject> ResourcesPrefabList;
+    public List<GameObject> RefugeesPrefabList;
+
+    public int refuggesTries = 5;
+
+    public int resourcesTries = 25;
+
     public float childDevAux;
 
     // Update is called once per frame
@@ -90,6 +97,8 @@ public class MapGenerator : MonoBehaviour
         ////////////////////////////////////////////////////////////
 
         SpawnMap();
+
+        
 
     }
     void Try2GrowNode(int direction,  ObstacleNode _father)
@@ -190,6 +199,49 @@ public class MapGenerator : MonoBehaviour
         {
             //Instantiate(obs.res.body, obs.position, Quaternion.identity, transform);
             Instantiate(obs.res.body,obs.position,((obs.IsSimetrical() && Random.Range(0f, 1f) < 0.5f) ? Quaternion.Euler(0,90,0) : Quaternion.identity),transform);
+        }
+        int refGen = 0;
+        int resGen = 0;
+        int x = 0;
+        int y = 0;
+        while (refGen<refuggesTries)
+        {
+            x = Random.Range(0,GridLength);
+            y = Random.Range(0, GridLength);
+            if (mapGrid[x][y]==0)
+            {
+                Instantiate( RefugeesPrefabList[Random.Range(0, RefugeesPrefabList.Count)] , new Vector3(x,0,y), Quaternion.Euler(0, 90* Random.Range(0, 4), 0) , transform);
+                mapGrid[x][y] = 1;
+
+                refGen++;
+            }
+        }
+        int iterations = 0;
+
+        while (refGen < resourcesTries && iterations < 100)
+        {
+            x = Random.Range(0, GridLength);
+            y = Random.Range(0, GridLength);
+            if (mapGrid[x][y] == 0)
+            {
+                Instantiate( ResourcesPrefabList[Random.Range(0, ResourcesPrefabList.Count)], new Vector3(x, 0, y), Quaternion.Euler(0, 90 * Random.Range(0, 4), 0), transform);
+                mapGrid[x][y] = 1;
+                refGen++;
+            }
+            iterations++;
+        }
+
+        
+    }
+
+    public void SetPlayersPos()
+    {
+        float s = -0.25f;
+        foreach (Player p in GameManager.instance.players)
+        {
+            print(obstacleList[0].position);
+            p.gameObject.transform.position = new Vector3(obstacleList[0].position.x - s, 1, obstacleList[0].position.z - s);
+            s++;
         }
     }
 

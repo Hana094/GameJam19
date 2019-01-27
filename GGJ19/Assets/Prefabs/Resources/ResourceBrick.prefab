@@ -59,6 +59,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d591e5924a4dd094ebd9f0107d4943b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  particles: {fileID: 4144051479866509543}
+  body: {fileID: 163013281961839614}
   resource: 2
 --- !u!1001 &163013281961741662
 PrefabInstance:
@@ -129,6 +131,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 976f201f7f7a73e4aaba2d581ecd7d12, type: 3}
+--- !u!1 &163013281961839614 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: 976f201f7f7a73e4aaba2d581ecd7d12,
+    type: 3}
+  m_PrefabInstance: {fileID: 163013281961741662}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &163013281962137566 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 976f201f7f7a73e4aaba2d581ecd7d12,
@@ -142,11 +150,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 163013282376787129}
     m_Modifications:
-    - target: {fileID: 5350071568130517313, guid: 2ef42a910ec84844385cf5c52f9d30be,
-        type: 3}
-      propertyPath: m_Name
-      value: PS_capturar
-      objectReference: {fileID: 0}
     - target: {fileID: 5350071568130517324, guid: 2ef42a910ec84844385cf5c52f9d30be,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -202,11 +205,32 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5350071568130517313, guid: 2ef42a910ec84844385cf5c52f9d30be,
+        type: 3}
+      propertyPath: m_Name
+      value: PS_capturar
+      objectReference: {fileID: 0}
+    - target: {fileID: 5350071568130517315, guid: 2ef42a910ec84844385cf5c52f9d30be,
+        type: 3}
+      propertyPath: looping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5350071568130517315, guid: 2ef42a910ec84844385cf5c52f9d30be,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ef42a910ec84844385cf5c52f9d30be, type: 3}
 --- !u!4 &4144051479866509544 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5350071568130517324, guid: 2ef42a910ec84844385cf5c52f9d30be,
+    type: 3}
+  m_PrefabInstance: {fileID: 8340074301163446692}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &4144051479866509543 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 5350071568130517315, guid: 2ef42a910ec84844385cf5c52f9d30be,
     type: 3}
   m_PrefabInstance: {fileID: 8340074301163446692}
   m_PrefabAsset: {fileID: 0}

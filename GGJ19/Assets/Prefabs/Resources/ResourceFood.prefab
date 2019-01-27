@@ -42,7 +42,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8013361478370355015}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.65
@@ -59,6 +59,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d591e5924a4dd094ebd9f0107d4943b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  particles: {fileID: 7673744205438143334}
+  body: {fileID: 3033237072552806722}
   resource: 0
 --- !u!1001 &2324376430278631973
 PrefabInstance:
@@ -67,11 +69,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3034830933949991785}
     m_Modifications:
-    - target: {fileID: 5350071568130517313, guid: 2ef42a910ec84844385cf5c52f9d30be,
-        type: 3}
-      propertyPath: m_Name
-      value: PS_capturar
-      objectReference: {fileID: 0}
     - target: {fileID: 5350071568130517324, guid: 2ef42a910ec84844385cf5c52f9d30be,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -127,11 +124,32 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5350071568130517313, guid: 2ef42a910ec84844385cf5c52f9d30be,
+        type: 3}
+      propertyPath: m_Name
+      value: PS_capturar
+      objectReference: {fileID: 0}
+    - target: {fileID: 5350071568130517315, guid: 2ef42a910ec84844385cf5c52f9d30be,
+        type: 3}
+      propertyPath: looping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5350071568130517315, guid: 2ef42a910ec84844385cf5c52f9d30be,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ef42a910ec84844385cf5c52f9d30be, type: 3}
 --- !u!4 &7673744205438143337 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5350071568130517324, guid: 2ef42a910ec84844385cf5c52f9d30be,
+    type: 3}
+  m_PrefabInstance: {fileID: 2324376430278631973}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &7673744205438143334 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 5350071568130517315, guid: 2ef42a910ec84844385cf5c52f9d30be,
     type: 3}
   m_PrefabInstance: {fileID: 2324376430278631973}
   m_PrefabAsset: {fileID: 0}
@@ -219,6 +237,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 85b2059d5a8e8f14bb9f4a5d92c15453, type: 3}
+--- !u!1 &3033237072552806722 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1140323741483685147, guid: 85b2059d5a8e8f14bb9f4a5d92c15453,
+    type: 3}
+  m_PrefabInstance: {fileID: 2723278565500656729}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7289631446252916715 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4675578917761192882, guid: 85b2059d5a8e8f14bb9f4a5d92c15453,

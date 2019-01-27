@@ -89,3 +89,17 @@ public class GameManager : MonoBehaviour
         }
     }
 }
+
+public struct RefugeeRef
+{
+    public int[] needs;
+
+    public RefugeeRef(int [] _needs)
+    {
+        needs = new int[3];
+        for (int i = 0; i < 3; i++)
+        {
+            needs[i] = _needs[i];
+        }
+    }
+}

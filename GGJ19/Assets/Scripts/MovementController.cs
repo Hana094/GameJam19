@@ -15,6 +15,8 @@ public class MovementController : MonoBehaviour
     [SerializeField] private float m_turnSpeed = 200;
     [SerializeField] private float m_jumpForce = 4;
     [SerializeField] private Rigidbody m_rigidBody;
+
+    [SerializeField] private Animator m_animator;
     public int playerId;
 
     [SerializeField] private ControlMode m_controlMode = ControlMode.Direct;
@@ -136,7 +138,7 @@ public class MovementController : MonoBehaviour
         transform.position += transform.forward * m_currentV * m_moveSpeed * Time.deltaTime;
         transform.Rotate(0, m_currentH * m_turnSpeed * Time.deltaTime, 0);
 
-        //m_animator.SetFloat("MoveSpeed", m_currentV);
+        m_animator.SetFloat("Speed", m_currentV);
 
         JumpingAndLanding();
     }
@@ -170,7 +172,7 @@ public class MovementController : MonoBehaviour
             transform.rotation = Quaternion.LookRotation(m_currentDirection);
             transform.position += m_currentDirection * m_moveSpeed * Time.deltaTime;
 
-            //m_animator.SetFloat("MoveSpeed", direction.magnitude);
+            m_animator.SetFloat("Speed", direction.magnitude);
         }
 
         JumpingAndLanding();
@@ -180,11 +182,7 @@ public class MovementController : MonoBehaviour
     {
         bool jumpCooldownOver = (Time.time - m_jumpTimeStamp) >= m_minJumpInterval;
 
-        if (jumpCooldownOver && m_isGrounded && Input.GetKey(KeyCode.Space))
-        {
-            m_jumpTimeStamp = Time.time;
-            m_rigidBody.AddForce(Vector3.up * m_jumpForce, ForceMode.Impulse);
-        }
+        
 
         if (!m_wasGrounded && m_isGrounded)
         {

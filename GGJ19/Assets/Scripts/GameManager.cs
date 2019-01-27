@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
 
     public Text[] textScores; //0 comida,1 logs,3buildmat, 4refugees
 
-    bool GameDone = true;
+    public bool GameDone = true;
 
     void Awake()
     {

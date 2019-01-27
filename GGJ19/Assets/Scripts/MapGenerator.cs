@@ -55,8 +55,8 @@ public class MapGenerator : MonoBehaviour
         {
             if (obstacleList.Count == 0)
             {
-                float x = Random.Range(0, GridLength - shelterObstacle.size[0]) + (shelterObstacle.size[0]/2);
-                float y = Random.Range(0, GridLength - shelterObstacle.size[1]) + (shelterObstacle.size[1] / 2);
+                float x = Random.Range(0, GridLength - (int)shelterObstacle.size[0]) + (shelterObstacle.size[0]/2);
+                float y = Random.Range(0, GridLength - (int)shelterObstacle.size[1]) + (shelterObstacle.size[1] / 2);
 
                 CreateNode(-1, shelterObstacle, null, new Vector3(x, 0, y));
             }
@@ -188,7 +188,8 @@ public class MapGenerator : MonoBehaviour
     {
         foreach (ObstacleNode obs in obstacleList)
         {
-            Instantiate(obs.res.body,obs.position,Quaternion.identity,transform);
+            //Instantiate(obs.res.body, obs.position, Quaternion.identity, transform);
+            Instantiate(obs.res.body,obs.position,((obs.IsSimetrical() && Random.Range(0f, 1f) < 0.5f) ? Quaternion.Euler(0,90,0) : Quaternion.identity),transform);
         }
     }
 
@@ -211,6 +212,11 @@ public class ObstacleNode
         direction = _direction;
         position = _position;
         children = new List<ObstacleNode>();
+    }
+
+    public bool IsSimetrical()
+    {
+        return res.size[0] == res.size[1];
     }
 
     

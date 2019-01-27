@@ -10,6 +10,10 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance = null;
     public MapGenerator map;
+    public Canvas Resources;
+    public Image Fader;
+
+    public Text[] Scores; //0 comida,1 logs,3buildmat, 4refugees
 
     void Awake()
     {

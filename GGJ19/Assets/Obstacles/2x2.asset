@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 689894ea0684fc64894994c07e3f3ae3, type: 3}
   m_Name: 2x2
   m_EditorClassIdentifier: 
-  size: 0200000003000000
+  size:
+  - 2
+  - 2
+  - 2
   name: 1x3
   body: {fileID: 146557127956519809, guid: 618f216f9cf23dc48819393c5e1ce8d8, type: 3}

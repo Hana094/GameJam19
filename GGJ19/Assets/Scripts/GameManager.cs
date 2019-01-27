@@ -102,7 +102,7 @@ public class GameManager : MonoBehaviour
 
         else if (scene.name.Equals("MenuScene"))
         {
-            //cambiar
+            
             audio.clip = clips[0];
             if (gameTimer != null)
             {
@@ -157,7 +157,7 @@ public class GameManager : MonoBehaviour
 
         aux.evaluate(gameWon);
 
-        //audio.Play();
+        audio.Play();
 
         yield return null;
 

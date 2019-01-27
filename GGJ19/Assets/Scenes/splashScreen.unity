@@ -193,7 +193,7 @@ PrefabInstance:
         type: 3}
       propertyPath: clips.Array.data[0]
       value: 
-      objectReference: {fileID: 8300000, guid: 1cc0a97eae37e144da94af1d69007d96, type: 3}
+      objectReference: {fileID: 8300000, guid: b6c54b0a8a583ae4ab34f5f3d0f16c26, type: 3}
     - target: {fileID: 219850840814989164, guid: db995bd80966acc4a86ad507cc484afc,
         type: 3}
       propertyPath: clips.Array.data[1]
